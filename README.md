@@ -1,36 +1,129 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Storybit – Frontend Assignment (Next.js 16)
 
-## Getting Started
+A frontend movie listing web application built as part of the **First Skill** assignment. This project uses modern Next.js 16 features, React 19, and TailwindCSS 4.
 
-First, run the development server:
+---
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+## 🚀 Tech Stack
+
+| Technology      | Version |
+| --------------- | ------- |
+| **Next.js**     | 16.0.3  |
+| **React**       | 19.2.0  |
+| **React DOM**   | 19.2.0  |
+| **TailwindCSS** | 4.x     |
+| **TypeScript**  | 5.x     |
+
+---
+
+## 📂 Project Structure
+
+```
+app/
+│── components/
+│── movie/[id]/
+│── popular/
+│── top-rated/
+│── upcoming/
+│── error.tsx
+│── favicon.ico
+│── globals.css
+│── layout.tsx
+│── page.tsx
+│
+lib/
+node_modules/
+public/
+types/
+.env.local
+next.config.ts
+package.json
+postcss.config.mjs
+tailwind.config.ts
+tsconfig.json
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+### Key Folders
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+- **app/** → Main routes using the App Router
+- **components/** → Reusable UI components
+- **lib/** → API utilities and helper functions
+- **types/** → TypeScript interfaces and type definitions
+- **public/** → Static assets
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+---
 
-## Learn More
+## 📡 API Integration (TMDB)
 
-To learn more about Next.js, take a look at the following resources:
+This project uses **The Movie Database (TMDB)** API to fetch movie data.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+### Add your API key inside `.env.local`:
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+```
+TMDB_API_KEY=your_v4_api_token_here
+```
 
-## Deploy on Vercel
+> Note: Use the **v4 Bearer token**, not v3.
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+### Example Fetch Function
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+```
+export async function fetchPopular() {
+  const res = await fetch(`${BASE}/movie/popular`, {
+    headers: {
+      Authorization: `Bearer ${API_KEY}`,
+    },
+  });
+  if (!res.ok) throw new Error("Failed to fetch");
+  return res.json();
+}
+```
+
+---
+
+## 🧱 Features
+
+- Popular, Top Rated, and Upcoming movie pages
+- Dynamic movie details page using route params `/movie/[id]`
+- Next.js 16 App Router architecture
+- Fully responsive UI using TailwindCSS 4
+- Clean folder structure
+- Error handling using `error.tsx`
+- Optimized images using `next/image`
+
+---
+
+## ▶️ Getting Started
+
+#### 1️⃣ Install dependencies
+
+```
+npm install
+```
+
+#### 2️⃣ Run the app
+
+```
+npm run dev
+```
+
+The project will be available at:
+
+```
+http://localhost:3000
+```
+
+---
+
+## 🏗️ Build for Production
+
+```
+npm run build
+npm start
+```
+
+---
+
+## 📄 License
+
+This project is created for assignment purposes and is free for personal use.
